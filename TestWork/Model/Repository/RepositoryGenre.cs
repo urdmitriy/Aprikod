@@ -28,7 +28,7 @@ public class RepositoryGenre : IRepositoryGenre
 
     public async Task<List<Game>?> GetGameByGenreAsync(int genreId)
     {
-        var result = await _gamesDbContext.Genres.FirstOrDefaultAsync(x => x.Id == genreId);
+        var result = await _gamesDbContext.Genres.Include(z=>z.Games).FirstOrDefaultAsync(x => x.Id == genreId);
         return result?.Games;
     }
 }
